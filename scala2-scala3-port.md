@@ -11,7 +11,14 @@ The following issues encountered when compiling OS-Lib under Dotty:
 - Scala 2.13 libraries cannot be used from Dotty, because the type signatures have Scala version `5.3` but `5.0` is expected.
 - `geny`, `utest` and `sourcecode` are dependencies of the lib. We explicitly declare them as `_2.12` to use from Dotty.
 - Feature warnings about implicits `scala.language.implicitConversions` are output by default, unlike in Scala 2. This creates noise. Unclear how to turn off.
-- Implicit conversions must be applied explicitly: `s.foldLeft(rel){_ / conv(_)} // conv: T => RelPath`
+
+Implicit conversions must be applied explicitly:
+
+```scala
+  implicit def IterablePath[T](s: Iterable[T])(implicit conv: T => RelPath): RelPath = {
+    s.foldLeft(rel){_ / conv(_)}
+  }
+```
 
 ## Tricky
 - Haoyi uses macros all over the place in his  test framework. Scala 3 doesn’t support them.
