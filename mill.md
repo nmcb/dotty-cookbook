@@ -4,6 +4,10 @@ Here's an example of how to test a project with mill:
 mill utest.jvm[2.12.8].test
 ```
 
+- `utest.jvm` - the name of the compiled module (obtain from `build.sc`)
+- `2.12.8` – Scala cross-compile version
+- `test` – task to run on the module specified with the specified Scala version
+
 To get mill of the most recent version:
 
 ```
